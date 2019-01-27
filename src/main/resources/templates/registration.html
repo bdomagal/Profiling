@@ -1,0 +1,29 @@
+<html>
+<body>
+<h1>Rejestracja</h1>
+<form action="" th:object="${user}" method="POST" enctype="utf8">
+    <div>
+        <label>Nazwa Użytkownika</label>
+        <input th:field="*{username}"/>
+    </div>
+    <div>
+        <label>Haslo</label>
+        <input th:field="*{password}"/>
+    </div>
+    <div>
+        <label>Pleć</label>
+        <select th:field="*{sex}">
+            <option value="M">Meżczyzna</option>
+            <option value="F">Kobieta</option>
+        </select>
+    </div>
+    <div>
+        <label>Data urodzenia</label>
+        <input type="date" th:field="*{dateOfBirth}"/>
+    </div>
+    <button type="submit">Zarejestruj</button>
+</form>
+
+<a th:href="@{/login}">Zaloguj</a>
+</body>
+</html>
