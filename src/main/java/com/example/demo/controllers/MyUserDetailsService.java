@@ -22,6 +22,7 @@ public class MyUserDetailsService implements UserDetailsService {
       throws UsernameNotFoundException {
   
         UserProfile user = userRepository.findByUsername(username);
+        if(user == null) throw new UsernameNotFoundException("Wrong username");
         boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;

@@ -8,8 +8,8 @@ import javax.persistence.*;
 public class UserPreference {
     private String tagName;
     private Integer idUser;
-    private Byte isLiked;
-    private Byte isMarkedToAvoid;
+    private Boolean isLiked;
+    private Boolean isMarkedToAvoid;
     private Tag tagByTagName;
     private User userByIdUser;
 
@@ -35,21 +35,21 @@ public class UserPreference {
 
     @Basic
     @Column(name = "is_liked", nullable = false)
-    public Byte getIsLiked() {
+    public Boolean getIsLiked() {
         return isLiked;
     }
 
-    public void setIsLiked(Byte isLiked) {
+    public void setIsLiked(Boolean isLiked) {
         this.isLiked = isLiked;
     }
 
     @Basic
     @Column(name = "is_marked_to_avoid", nullable = false)
-    public Byte getIsMarkedToAvoid() {
+    public Boolean getIsMarkedToAvoid() {
         return isMarkedToAvoid;
     }
 
-    public void setIsMarkedToAvoid(Byte isMarkedToAvoid) {
+    public void setIsMarkedToAvoid(Boolean isMarkedToAvoid) {
         this.isMarkedToAvoid = isMarkedToAvoid;
     }
 

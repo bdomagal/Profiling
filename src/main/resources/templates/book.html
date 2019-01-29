@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+    <script src="/js/main.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Bookstore</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li th:if="${loggedIn}" class="nav-item active">
+                    <a class="nav-link" href="/categories">Categories <span class="sr-only"></span></a>
+                </li>
+                <li th:if="${!loggedIn}" class="nav-item active">
+                    <a class="nav-link" href="/login">Login <span class="sr-only"></span></a>
+                </li>
+                <li th:if="${loggedIn}" class="nav-item active">
+                    <a class="nav-link" href="/logout">Logout <span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1 th:text="${book.title}"></h1>
+    <h2>Time spent on page(Saves every 10 seconds)</h2><h2 id="timer"></h2>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        var message = /*[[${book.idBook}]]*/ 'default';
+        
+        var timer = 0;
+        jQuery(document).ready(function ($) {
+            var start = false;
+            $.ajax({
+                url: "/book/" + message + "/getTime",
+                method: 'GET',
+                success: function (data) {
+                    document.getElementById('timer').innerHTML = data;
+                    timer = data;
+                    start = true;
+                }
+            });
+
+            var t=setInterval(runFunction,1000);
+            var t2 = setInterval(saveTime, 10000);
+
+
+
+        });
+        function runFunction(){
+            timer = timer + 1;
+            document.getElementById('timer').innerHTML = timer;
+        }
+        function saveTime(){
+            $.ajax({
+                url: "/book/" + message + "/setTime",
+                method: 'POST',
+                data: JSON.stringify(timer),
+                contentType: 'application/json'
+            }); 
+        }
+
+        /*]]>*/
+    </script>
+</body>
+
+</html>

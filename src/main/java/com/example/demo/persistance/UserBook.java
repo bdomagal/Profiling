@@ -8,8 +8,8 @@ import javax.persistence.*;
 public class UserBook {
     private Integer idUser;
     private Integer idBook;
-    private Byte isMarkedAsNotInterested;
-    private Byte isMarkedAsToRead;
+    private Boolean markedAsNotInterested;
+    private Boolean markedAsToRead;
     private Byte review;
     private Integer timeSpentOnPage;
     private Integer timesVisited;
@@ -38,22 +38,22 @@ public class UserBook {
 
     @Basic
     @Column(name = "is_marked_as_not_interested", nullable = false)
-    public Byte getIsMarkedAsNotInterested() {
-        return isMarkedAsNotInterested;
+    public Boolean isMarkedAsNotInterested() {
+        return markedAsNotInterested;
     }
 
-    public void setIsMarkedAsNotInterested(Byte isMarkedAsNotInterested) {
-        this.isMarkedAsNotInterested = isMarkedAsNotInterested;
+    public void setMarkedAsNotInterested(Boolean isMarkedAsNotInterested) {
+        this.markedAsNotInterested = isMarkedAsNotInterested;
     }
 
     @Basic
     @Column(name = "is_marked_as_to_read", nullable = false)
-    public Byte getIsMarkedAsToRead() {
-        return isMarkedAsToRead;
+    public Boolean isMarkedAsToRead() {
+        return markedAsToRead;
     }
 
-    public void setIsMarkedAsToRead(Byte isMarkedAsToRead) {
-        this.isMarkedAsToRead = isMarkedAsToRead;
+    public void setMarkedAsToRead(Boolean isMarkedAsToRead) {
+        this.markedAsToRead = isMarkedAsToRead;
     }
 
     @Basic
@@ -95,9 +95,9 @@ public class UserBook {
 
         if (idUser != null ? !idUser.equals(userBook.idUser) : userBook.idUser != null) return false;
         if (idBook != null ? !idBook.equals(userBook.idBook) : userBook.idBook != null) return false;
-        if (isMarkedAsNotInterested != null ? !isMarkedAsNotInterested.equals(userBook.isMarkedAsNotInterested) : userBook.isMarkedAsNotInterested != null)
+        if (markedAsNotInterested != null ? !markedAsNotInterested.equals(userBook.markedAsNotInterested) : userBook.markedAsNotInterested != null)
             return false;
-        if (isMarkedAsToRead != null ? !isMarkedAsToRead.equals(userBook.isMarkedAsToRead) : userBook.isMarkedAsToRead != null)
+        if (markedAsToRead != null ? !markedAsToRead.equals(userBook.markedAsToRead) : userBook.markedAsToRead != null)
             return false;
         if (review != null ? !review.equals(userBook.review) : userBook.review != null) return false;
         if (timeSpentOnPage != null ? !timeSpentOnPage.equals(userBook.timeSpentOnPage) : userBook.timeSpentOnPage != null)
@@ -112,8 +112,8 @@ public class UserBook {
     public int hashCode() {
         int result = idUser != null ? idUser.hashCode() : 0;
         result = 31 * result + (idBook != null ? idBook.hashCode() : 0);
-        result = 31 * result + (isMarkedAsNotInterested != null ? isMarkedAsNotInterested.hashCode() : 0);
-        result = 31 * result + (isMarkedAsToRead != null ? isMarkedAsToRead.hashCode() : 0);
+        result = 31 * result + (markedAsNotInterested != null ? markedAsNotInterested.hashCode() : 0);
+        result = 31 * result + (markedAsToRead != null ? markedAsToRead.hashCode() : 0);
         result = 31 * result + (review != null ? review.hashCode() : 0);
         result = 31 * result + (timeSpentOnPage != null ? timeSpentOnPage.hashCode() : 0);
         result = 31 * result + (timesVisited != null ? timesVisited.hashCode() : 0);
